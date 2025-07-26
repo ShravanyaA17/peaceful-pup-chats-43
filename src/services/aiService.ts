@@ -15,7 +15,7 @@ export class AIService {
   private apiKey: string | null = null;
   private sdk: any = null;
   private isProduction: boolean = false;
-  private renderApiUrl: string = "https://your-app-name.onrender.com"; // Update this after deployment
+  private renderApiUrl: string = "https://peaceful-pup-chats-43.onrender.com"; // Updated with your Render URL
 
   constructor() {
     // Get API key from localStorage for frontend-only setup
