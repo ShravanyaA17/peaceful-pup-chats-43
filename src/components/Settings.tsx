@@ -92,13 +92,13 @@ export function Settings({ onClose }: SettingsProps) {
               <div className="text-xs text-peace-text-gentle">
                 <p className="font-medium mb-1">Current Status:</p>
                 <p>
-                  Due to CORS restrictions, the app currently uses intelligent fallback responses 
-                  that are personalized to your input. For full AI integration, a backend proxy would be needed.
+                  Your app is connected to a secure Render backend that handles AI requests. 
+                  Enter your Bytez API key to enable personalized AI responses!
                 </p>
                 <p className="mt-2 font-medium">Privacy Note:</p>
                 <p>
-                  Your API key is stored locally in your browser and used directly to call Bytez. 
-                  For better security, consider using Firebase Functions in production.
+                  Your API key is stored locally in your browser and sent securely to our 
+                  Render backend, which proxies requests to Bytez API with proper CORS handling.
                 </p>
               </div>
             </div>
