@@ -47,6 +47,9 @@ app.post('/api/bytez', async (req, res) => {
 
     console.log(`Making request to Bytez API with model: ${model}`);
     
+    // Generate a simple user ID for this session
+    const userId = `user_${Math.random().toString(36).substring(2, 15)}`;
+    
     // Make the request to Bytez API
     const response = await fetch(`https://api.bytez.com/models/v2/${model}`, {
       method: 'POST',
@@ -59,7 +62,7 @@ app.post('/api/bytez', async (req, res) => {
         messages: messages,
         max_tokens: 1000,
         temperature: 0.7,
-        uid: "peaceful-pup-user-" + Date.now() // Generate unique user ID
+        uid: userId
       })
     });
 
