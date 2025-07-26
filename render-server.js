@@ -1,4 +1,4 @@
-// Render.com API endpoint for Bytez proxy
+// Render.com API endpoint for AI/ML API proxy
 import express from "express";
 import cors from "cors";
 import fetch from "node-fetch";
@@ -83,14 +83,14 @@ app.post("/api/aiml", async (req, res) => {
     try {
       data = JSON.parse(responseText);
     } catch (parseError) {
-      console.error("Failed to parse Bytez response:", parseError);
+      console.error("Failed to parse AI/ML API response:", parseError);
       return res.status(500).json({
         error: "Invalid response format",
-        message: "Received invalid JSON from Bytez API",
+        message: "Received invalid JSON from AI/ML API",
       });
     }
 
-    console.log("Successfully proxied Bytez API request");
+    console.log("Successfully proxied AI/ML API request");
     res.json(data);
   } catch (error) {
     console.error("Render API error:", error);
@@ -106,7 +106,7 @@ app.use((req, res) => {
   res.status(404).json({
     error: "Not found",
     message: "The requested endpoint does not exist",
-    availableEndpoints: ["/", "/api/bytez"],
+    availableEndpoints: ["/", "/api/aiml"],
   });
 });
 
@@ -114,5 +114,5 @@ app.listen(PORT, () => {
   console.log(`🐕 Peaceful Pup API running on Render at port ${PORT}`);
   console.log(`📡 CORS enabled for all origins`);
   console.log(`🔗 Health check available at: /`);
-  console.log(`🤖 Bytez proxy available at: /api/bytez`);
+  console.log(`🤖 AI/ML API proxy available at: /api/aiml`);
 });
