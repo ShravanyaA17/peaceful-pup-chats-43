@@ -12,25 +12,25 @@ interface SettingsProps {
 }
 
 export function Settings({ onClose }: SettingsProps) {
-  const [chatGptKey, setChatGptKey] = useState("");
+  const [bytezKey, setBytezKey] = useState("");
   const [showKey, setShowKey] = useState(false);
   const { toast } = useToast();
 
   const handleSaveApiKey = () => {
-    if (!chatGptKey.trim()) {
+    if (!bytezKey.trim()) {
       toast({
         title: "Please enter an API key",
-        description: "You need to provide a ChatGPT API key to enable AI responses.",
+        description: "You need to provide a Bytez API key to enable AI responses.",
         variant: "destructive"
       });
       return;
     }
 
     try {
-      aiService.setApiKey(chatGptKey);
+      aiService.setApiKey(bytezKey);
       toast({
         title: "API key saved! ✨",
-        description: "Your ChatGPT API key has been saved securely in your browser."
+        description: "Your Bytez API key has been saved securely in your browser."
       });
       onClose();
     } catch (error) {
@@ -52,16 +52,16 @@ export function Settings({ onClose }: SettingsProps) {
 
         <div className="space-y-6">
           <div>
-            <Label htmlFor="chatgpt-key" className="text-peace-text-soft">
-              ChatGPT API Key
+            <Label htmlFor="bytez-key" className="text-peace-text-soft">
+              Bytez API Key
             </Label>
             <div className="relative mt-2">
               <Input
-                id="chatgpt-key"
+                id="bytez-key"
                 type={showKey ? "text" : "password"}
-                value={chatGptKey}
-                onChange={(e) => setChatGptKey(e.target.value)}
-                placeholder="sk-..."
+                value={bytezKey}
+                onChange={(e) => setBytezKey(e.target.value)}
+                placeholder="Enter your Bytez API key..."
                 className="pr-10 border-peace-pink/30 focus:border-peace-purple"
               />
               <button
@@ -75,12 +75,12 @@ export function Settings({ onClose }: SettingsProps) {
             <p className="text-xs text-peace-text-gentle mt-2">
               Get your API key from{" "}
               <a 
-                href="https://platform.openai.com/api-keys" 
+                href="https://bytez.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-peace-purple hover:underline"
               >
-                OpenAI Platform
+                Bytez Platform
               </a>
             </p>
           </div>
@@ -91,7 +91,7 @@ export function Settings({ onClose }: SettingsProps) {
               <div className="text-xs text-peace-text-gentle">
                 <p className="font-medium mb-1">Privacy Note:</p>
                 <p>
-                  Your API key is stored locally in your browser and used directly to call OpenAI. 
+                  Your API key is stored locally in your browser and used directly to call Bytez. 
                   For better security, consider using Firebase Functions in production.
                 </p>
               </div>
