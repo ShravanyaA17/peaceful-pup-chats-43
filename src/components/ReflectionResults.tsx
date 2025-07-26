@@ -13,6 +13,7 @@ import { useState, useEffect, useRef } from "react";
 import { aiService } from "@/services/aiService";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import DogLoadingAnimation from "@/components/DogLoadingAnimation";
 
 interface Insight {
   title: string;
@@ -287,10 +288,7 @@ export function ReflectionResults({
                       : "Personalized AI Insights & Micro-Tasks ✨"}
                   </h3>
                   {isLoadingAI ? (
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-slate-600"></div>
-                      Peace is analyzing your responses and thoughts...
-                    </div>
+                    <DogLoadingAnimation />
                   ) : (
                     <div className="prose prose-slate max-w-none">
                       <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">

@@ -39,6 +39,38 @@ export class AIService {
     localStorage.setItem("bytez_api_key", apiKey);
   }
 
+  private formatAIResponse(response: string): string {
+    // Remove redundant introductions and clean up the response
+    let formatted = response
+      // Remove common AI introductions
+      .replace(/^(Hello there\.|Hi there\.|Hello!\s*)?I'?m Peace,?\s*(and\s*)?I'?m here to (listen and offer support|help you|support you)\.?\s*/i, '')
+      .replace(/It takes courage to share what you're feeling\.?\s*/i, '')
+      .replace(/I can see that\.?\s*/i, '')
+      .replace(/I understand that\.?\s*/i, '')
+      
+      // Clean up repetitive phrases
+      .replace(/\s*🫂\s*You mentioned/g, ' You mentioned')
+      .replace(/\s*✨\s*$/gm, '')
+      .replace(/\s*💡\s*$/gm, '')
+      
+      // Improve formatting
+      .replace(/\*\*(Understanding Your Situation:)\*\*\s*🫂\s*/g, '**$1** ')
+      .replace(/\*\*(Immediate Action Steps:)\*\*\s*✨\s*/g, '\n**$1**\n')
+      .replace(/\*\*(Why This Helps:)\*\*\s*💡\s*/g, '\n**$1** ')
+      
+      // Clean up numbered lists
+      .replace(/(\d+)\.\s*\*\*(.*?)\*\*:\s*/g, '$1. **$2:** ')
+      
+      // Remove excessive spacing
+      .replace(/\n\s*\n\s*\n/g, '\n\n')
+      .replace(/^\s+|\s+$/g, '')
+      
+      // Ensure proper paragraph spacing
+      .replace(/\*\*Why This Helps:\*\*/g, '\n**Why This Helps:**');
+
+    return formatted;
+  }
+
   hasApiKey(): boolean {
     return !!this.apiKey;
   }
@@ -97,7 +129,7 @@ export class AIService {
 
     const answerSummary = this.formatAnswersForAI(selectedAnswers);
 
-    const prompt = `You are Peace, a compassionate mental health companion. A person shared their personal thoughts about their anxiety. Give them SPECIFIC, ACTIONABLE solutions with minimal, tasteful emojis.
+    const prompt = `You are Peace, a compassionate mental health companion. A person shared their personal thoughts about their anxiety. Give them SPECIFIC, ACTIONABLE solutions.
 
 THEIR CHECK-IN RESPONSES:
 ${answerSummary}
@@ -107,20 +139,22 @@ THEIR PERSONAL THOUGHTS:
 
 PROVIDE CONCRETE SOLUTIONS IN THIS FORMAT:
 
-**Understanding Your Situation:** 🫂
+**Understanding Your Situation:** 
 Briefly acknowledge their specific concern in 1-2 sentences.
 
-**Immediate Action Steps:** ✨
+**Immediate Action Steps:**
 Give 3-4 SPECIFIC things they can do RIGHT NOW to address their exact concern. Be detailed and actionable.
 
-**Why This Helps:** 💡
+**Why This Helps:** 
 Explain briefly why these steps will help their specific situation.
 
 IMPORTANT: 
-- Use only 2-3 relevant emojis total
+- Use only 1-2 relevant emojis total  
 - Be SPECIFIC to their exact words and situation  
 - Give concrete steps, not general advice
 - Focus on immediate, doable actions
+- Keep response under 200 words
+- NO greetings or introductions
 
 BE SPECIFIC. Give exact steps, not general advice. Focus on their exact words and situation.`;
 
@@ -160,7 +194,7 @@ BE SPECIFIC. Give exact steps, not general advice. Focus on their exact words an
 
         if (aiResponse.trim()) {
           console.info("Render API response received successfully");
-          return aiResponse;
+          return this.formatAIResponse(aiResponse);
         } else {
           console.warn("Empty response from Render API, using fallback");
           return this.generateExamplePersonalResponse(personalReasons);
@@ -202,7 +236,7 @@ BE SPECIFIC. Give exact steps, not general advice. Focus on their exact words an
 
         if (aiResponse.trim()) {
           console.info("Render API response received successfully");
-          return aiResponse;
+          return this.formatAIResponse(aiResponse);
         } else {
           console.warn("Empty response from Render API, using fallback");
           return this.generateExamplePersonalResponse(personalReasons);
@@ -250,7 +284,7 @@ PROVIDE A RESPONSE THAT INCLUDES:
 
 4. **Encouragement** (1-2 sentences): End with hope and remind them of their strength.
 
-FORMAT: Use a caring, conversational tone. Include 1-2 relevant emojis total. Keep response to 3-4 paragraphs max.
+FORMAT: Use a caring, conversational tone. Include 1-2 relevant emojis total. Keep response to 3-4 paragraphs max. NO greetings or introductions.
 
 EXAMPLE MICRO-TASKS BASED ON THEIR ANSWERS:
 - "Try the 5-4-3-2-1 grounding technique: name 5 things you see, 4 you can touch, 3 you hear, 2 you smell, 1 you taste"
@@ -297,7 +331,7 @@ Be specific and actionable, not generic.`;
 
         if (aiResponse.trim()) {
           console.info("Render API response received successfully");
-          return aiResponse;
+          return this.formatAIResponse(aiResponse);
         } else {
           console.warn("Empty response from Render API, using fallback");
           return this.generateFallbackResponse(selectedAnswers);
@@ -339,7 +373,7 @@ Be specific and actionable, not generic.`;
 
         if (aiResponse.trim()) {
           console.info("Render API response received successfully");
-          return aiResponse;
+          return this.formatAIResponse(aiResponse);
         } else {
           console.warn("Empty response from Render API, using fallback");
           return this.generateFallbackResponse(selectedAnswers);
