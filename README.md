@@ -1,69 +1,66 @@
-# Welcome to your Lovable project
+# 🐾 Peaceful Pup – Understand Your Unease
 
-## Project info
+**Peaceful Pup** is a gentle, guided web app that helps you figure out *why* you're feeling anxious, uneasy, or emotionally off—especially when it's hard to put into words.
 
-## How can I edit this code?
+Rather than trying to fix your feelings with generic AI advice, Peaceful Pup offers a thoughtful **checklist-based approach** paired with **smart, human-style insights**. It helps you gently reflect, explore patterns, and feel more grounded—without overwhelming you.
 
-There are several ways of editing your application.
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/743c282b-2a5f-436c-bbae-9f20f9e20fd4) and start prompting.
+## What It Does
 
-Changes made via Lovable will be committed automatically to this repo.
+When you're feeling off but don't know why, Peaceful Pup guides you through a curated list of emotional and situational prompts—like:
 
-**Use your preferred IDE**
+* “Did I have enough rest?”
+* “Is there a conversation I’m avoiding?”
+* “Am I sensing someone else’s emotions?”
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Once you select what resonates, the app surfaces **smart insights**—simple explanations, patterns, or reminders that help you better understand your inner state. It's like a mindful checklist with gentle nudges, not robotic responses.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## Why It’s Different
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+> Most AI tools try to *respond* to your emotions. Peaceful Pup helps you *explore* them.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+* ✅ **Checklist-first approach** – Designed for clarity and self-discovery, not passive consumption.
+* 🧭 **Pattern-aware insights** – Instead of vague feel-good quotes, it reflects back themes based on your input.
+* 💬 **Human-like clarity** – No over-engineered AI responses—just thoughtful feedback to help you name what you’re feeling.
+* 🔒 **No data collection** – Your check-ins stay private; no tracking or personal storage.
 
-# Step 3: Install the necessary dependencies.
-npm i
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+## Try It Out
+
+👉 **Live App**: [https://peaceful-pup.netlify.app/](https://peaceful-pup.netlify.app/)
+
+---
+
+## Installation
+
+If you want to run the app locally:
+
+```bash
+# Clone the repository
+git clone https://github.com/ShravanyaA17/peaceful-pup-chats-43.git
+
+# Navigate to the project directory
+cd peaceful-pup-chats-43
+
+# Install dependencies
+npm install
+
+# Start the development server
 npm run dev
+
+
+Then open your browser to `http://localhost:3000`.
+
 ```
+## Tech Stack
 
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/743c282b-2a5f-436c-bbae-9f20f9e20fd4) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+* **React + Vite** – For building an interactive, component-based UI, fast bundling.
+* **TypeScript** – For type safety and scalable code.
+* **Tailwind CSS** – Utility-first styling framework for modern UI.
+* **jsPDF** – Used to export journal reflections as downloadable PDFs.
+* **Netlify** – Frontend hosting.
+* **Render** – backend deployment.
