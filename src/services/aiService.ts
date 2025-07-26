@@ -136,7 +136,7 @@ BE SPECIFIC. Give exact steps, not general advice. Focus on their exact words an
           },
           body: JSON.stringify({
             apiKey: '9ef781c231ba48f3b7bc87db36a0b317',
-            model: "gemma-3-1b-it",
+            model: "google/gemma-3n-e4b-it",
             messages: [
               {
                 role: "user",
@@ -178,7 +178,7 @@ BE SPECIFIC. Give exact steps, not general advice. Focus on their exact words an
           },
           body: JSON.stringify({
             apiKey: '9ef781c231ba48f3b7bc87db36a0b317',
-            model: "gemma-3-1b-it",
+            model: "google/gemma-3n-e4b-it",
             messages: [
               {
                 role: "user",
@@ -273,7 +273,7 @@ Be specific and actionable, not generic.`;
           },
           body: JSON.stringify({
             apiKey: '9ef781c231ba48f3b7bc87db36a0b317',
-            model: "gemma-3-1b-it",
+            model: "google/gemma-3n-e4b-it",
             messages: [
               {
                 role: "user",
@@ -315,7 +315,7 @@ Be specific and actionable, not generic.`;
           },
           body: JSON.stringify({
             apiKey: '9ef781c231ba48f3b7bc87db36a0b317',
-            model: "gemma-3-1b-it",
+            model: "google/gemma-3n-e4b-it",
             messages: [
               {
                 role: "user",
