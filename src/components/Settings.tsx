@@ -3,7 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Settings as SettingsIcon, Eye, EyeOff, AlertCircle } from "lucide-react";
+import {
+  Settings as SettingsIcon,
+  Eye,
+  EyeOff,
+  AlertCircle,
+} from "lucide-react";
 import { aiService } from "@/services/aiService";
 import { useToast } from "@/hooks/use-toast";
 
@@ -20,8 +25,9 @@ export function Settings({ onClose }: SettingsProps) {
     if (!bytezKey.trim()) {
       toast({
         title: "Please enter an API key",
-        description: "You need to provide a Bytez API key to enable AI responses.",
-        variant: "destructive"
+        description:
+          "You need to provide a Bytez API key to enable AI responses.",
+        variant: "destructive",
       });
       return;
     }
@@ -30,14 +36,16 @@ export function Settings({ onClose }: SettingsProps) {
       aiService.setApiKey(bytezKey);
       toast({
         title: "API key saved! ✨",
-        description: "Your Bytez API key has been saved securely in your browser."
+        description:
+          "Your Bytez API key has been saved securely in your browser.",
       });
       onClose();
     } catch (error) {
       toast({
         title: "Error saving API key",
-        description: "There was a problem saving your API key. Please try again.",
-        variant: "destructive"
+        description:
+          "There was a problem saving your API key. Please try again.",
+        variant: "destructive",
       });
     }
   };
@@ -47,13 +55,17 @@ export function Settings({ onClose }: SettingsProps) {
       <Card className="w-full max-w-md p-6 shadow-comfort border-peace-pink/20">
         <div className="flex items-center gap-2 mb-6">
           <SettingsIcon className="w-5 h-5 text-peace-purple" />
-          <h2 className="text-xl font-semibold text-peace-text-soft">Settings</h2>
+          <h2 className="text-xl font-semibold text-peace-text-soft">
+            Settings
+          </h2>
         </div>
 
         <div className="space-y-6">
+          {/* API key section hidden since we're using hardcoded AI/ML API key */}
+          {false && (
           <div>
             <Label htmlFor="bytez-key" className="text-peace-text-soft">
-              Bytez API Key
+              AI API Key
             </Label>
             <div className="relative mt-2">
               <Input
@@ -61,7 +73,7 @@ export function Settings({ onClose }: SettingsProps) {
                 type={showKey ? "text" : "password"}
                 value={bytezKey}
                 onChange={(e) => setBytezKey(e.target.value)}
-                placeholder="Enter your Bytez API key..."
+                placeholder="Enter your AI API key..."
                 className="pr-10 border-peace-pink/30 focus:border-peace-purple"
               />
               <button
@@ -69,22 +81,27 @@ export function Settings({ onClose }: SettingsProps) {
                 onClick={() => setShowKey(!showKey)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-peace-text-gentle hover:text-peace-purple transition-colors"
               >
-                {showKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                {showKey ? (
+                  <EyeOff className="w-4 h-4" />
+                ) : (
+                  <Eye className="w-4 h-4" />
+                )}
               </button>
             </div>
             <p className="text-xs text-peace-text-gentle mt-2">
               Get your API key from{" "}
-              <a 
-                href="https://bytez.com" 
-                target="_blank" 
+              <a
+                href="https://aimlapi.com"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-peace-purple hover:underline"
               >
-                Bytez Platform
-              </a>
-              {" "}or leave empty to use example responses.
+                AI/ML API Platform
+              </a>{" "}
+              or leave empty to use example responses.
             </p>
           </div>
+          )}
 
           <div className="bg-peace-lavender/20 p-4 rounded-lg border border-peace-pink/20">
             <div className="flex items-start gap-2">
@@ -92,20 +109,24 @@ export function Settings({ onClose }: SettingsProps) {
               <div className="text-xs text-peace-text-gentle">
                 <p className="font-medium mb-1">Current Status:</p>
                 <p>
-                  Your app is connected to a secure Render backend that handles AI requests. 
-                  Enter your Bytez API key to enable personalized AI responses!
+                  ✅ AI is now active and working! Your app is connected to AI/ML API 
+                  through a secure Render backend for personalized responses.
                 </p>
-                <p className="mt-2 font-medium">Privacy Note:</p>
+                <p className="mt-2 font-medium">How it works:</p>
                 <p>
-                  Your API key is stored locally in your browser and sent securely to our 
-                  Render backend, which proxies requests to Bytez API with proper CORS handling.
+                  All AI requests are handled securely through our backend server
+                  with proper CORS handling and privacy protection.
                 </p>
               </div>
             </div>
           </div>
 
           <div className="flex gap-3">
-            <Button onClick={handleSaveApiKey} variant="comfort" className="flex-1">
+            <Button
+              onClick={handleSaveApiKey}
+              variant="comfort"
+              className="flex-1"
+            >
               Save API Key
             </Button>
             <Button onClick={onClose} variant="secondary" className="flex-1">

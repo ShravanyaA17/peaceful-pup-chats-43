@@ -7,6 +7,7 @@ Perfect combination: **Render for backend API** + **Netlify for frontend**
 ### **Step 1: Deploy Backend API to Render**
 
 1. **Push to GitHub:**
+
    ```bash
    git add .
    git commit -m "Deploy with Render + Netlify"
@@ -14,6 +15,7 @@ Perfect combination: **Render for backend API** + **Netlify for frontend**
    ```
 
 2. **Deploy Backend to Render:**
+
    - Go to [render.com](https://render.com)
    - Click "New" → "Web Service"
    - Connect your GitHub repository
@@ -31,6 +33,7 @@ Perfect combination: **Render for backend API** + **Netlify for frontend**
 ### **Step 2: Deploy Frontend to Netlify**
 
 1. **Deploy to Netlify:**
+
    - Go to [netlify.com](https://netlify.com)
    - Click "Add new site" → "Import an existing project"
    - Connect your GitHub repository
@@ -64,25 +67,28 @@ npm run server
 ```
 
 The app automatically detects:
+
 - **Local** (`localhost`) → Uses fallback responses or local backend
 - **Deployed** → Uses real AI via Render API
 
 ## ✅ **What's Configured:**
 
 1. **`render-server.js`** - Express server with CORS handling
-2. **`netlify.toml`** - Frontend deployment configuration  
+2. **`netlify.toml`** - Frontend deployment configuration
 3. **Smart AI service** - Automatically uses Render API when deployed
 4. **Secure setup** - API key stored locally, transmitted securely
 
 ## 🎯 **Why Render + Netlify is Perfect:**
 
 ### **Render (Backend):**
+
 - **Free tier available** - Perfect for API server
-- **Automatic HTTPS** - No SSL certificate hassle  
+- **Automatic HTTPS** - No SSL certificate hassle
 - **CORS handled** - Proper headers automatically
 - **Always-on** - No cold starts for API calls
 
 ### **Netlify (Frontend):**
+
 - **Free tier generous** - Perfect for React apps
 - **Global CDN** - Fast loading worldwide
 - **Automatic builds** - Deploy on every git push
@@ -108,6 +114,7 @@ Your app is **fully deployed** with real AI responses! 🐕💜✨
 4. **Start chatting** with Peace, your AI mental health companion!
 
 The app will automatically:
-- Use your **Render backend** (`https://peaceful-pup-chats-43.onrender.com`) 
+
+- Use your **Render backend** (`https://peaceful-pup-chats-43.onrender.com`)
 - Handle **CORS properly** through the proxy
 - Provide **real AI responses** from Bytez

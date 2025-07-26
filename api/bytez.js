@@ -1,32 +1,18 @@
-const express = require("express");
-const cors = require("cors");
-const fetch = require("node-fetch");
-require("dotenv").config();
+// Vercel Serverless Function for Bytez API Proxy
+export default async function handler(req, res) {
+  // Enable CORS
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-const app = express();
-const PORT = process.env.PORT || 3001;
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
 
-// Enable CORS for your frontend
-app.use(
-  cors({
-    origin: [
-      "http://localhost:8081",
-      "http://localhost:3000",
-      "http://localhost:5173",
-    ],
-    credentials: true,
-  })
-);
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
+  }
 
-app.use(express.json());
-
-// Health check endpoint
-app.get("/health", (req, res) => {
-  res.json({ status: "OK", message: "Peaceful Pup Backend is running!" });
-});
-
-// Proxy endpoint for Bytez API
-app.post("/api/bytez/chat", async (req, res) => {
   try {
     const { apiKey, model, messages } = req.body;
 
@@ -59,7 +45,7 @@ app.post("/api/bytez/chat", async (req, res) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
-        "User-Agent": "Peaceful-Pup-Backend/1.0",
+        "User-Agent": "Peaceful-Pup-Vercel/1.0",
       },
       body: JSON.stringify({
         messages: messages,
@@ -92,35 +78,12 @@ app.post("/api/bytez/chat", async (req, res) => {
     }
 
     console.log("Successfully proxied Bytez API request");
-    res.json(data);
+    return res.json(data);
   } catch (error) {
-    console.error("Backend error:", error);
-    res.status(500).json({
+    console.error("Vercel API error:", error);
+    return res.status(500).json({
       error: "Internal server error",
       message: error.message || "Failed to process request",
     });
   }
-});
-
-// Error handling middleware
-app.use((error, req, res, next) => {
-  console.error("Unhandled error:", error);
-  res.status(500).json({
-    error: "Internal server error",
-    message: "Something went wrong on the server",
-  });
-});
-
-// 404 handler
-app.use((req, res) => {
-  res.status(404).json({
-    error: "Not found",
-    message: "The requested endpoint does not exist",
-  });
-});
-
-app.listen(PORT, () => {
-  console.log(`🐕 Peaceful Pup Backend running on port ${PORT}`);
-  console.log(`📡 CORS enabled for frontend development servers`);
-  console.log(`🔗 Health check available at: http://localhost:${PORT}/health`);
-});
+}

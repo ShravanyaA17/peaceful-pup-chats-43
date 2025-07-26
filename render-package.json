@@ -1,0 +1,21 @@
+{
+  "name": "peaceful-pup-render-api",
+  "version": "1.0.0",
+  "description": "Render.com API server for Peaceful Pup Chats",
+  "main": "render-server.js",
+  "scripts": {
+    "start": "node render-server.js",
+    "dev": "nodemon render-server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

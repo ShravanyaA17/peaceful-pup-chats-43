@@ -1,7 +1,7 @@
 // Render.com API endpoint for Bytez proxy
-import express from 'express';
-import cors from 'cors';
-import fetch from 'node-fetch';
+import express from "express";
+import cors from "cors";
+import fetch from "node-fetch";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,76 +11,71 @@ app.use(cors());
 app.use(express.json());
 
 // Health check endpoint
-app.get('/', (req, res) => {
-  res.json({ 
-    status: 'OK', 
-    message: 'Peaceful Pup API is running on Render!',
-    endpoints: ['/api/bytez']
+app.get("/", (req, res) => {
+  res.json({
+    status: "OK",
+    message: "Peaceful Pup API is running on Render!",
+    endpoints: ["/api/aiml"],
   });
 });
 
-// Bytez proxy endpoint
-app.post('/api/bytez', async (req, res) => {
+// AI/ML API proxy endpoint
+app.post("/api/aiml", async (req, res) => {
   try {
     const { apiKey, model, messages } = req.body;
 
     if (!apiKey) {
-      return res.status(400).json({ 
-        error: 'API key is required',
-        message: 'Please provide a valid Bytez API key'
+      return res.status(400).json({
+        error: "API key is required",
+        message: "Please provide a valid AI/ML API key",
       });
     }
 
     if (!model) {
-      return res.status(400).json({ 
-        error: 'Model is required',
-        message: 'Please specify which AI model to use'
+      return res.status(400).json({
+        error: "Model is required",
+        message: "Please specify which AI model to use",
       });
     }
 
     if (!messages || !Array.isArray(messages)) {
-      return res.status(400).json({ 
-        error: 'Messages are required',
-        message: 'Please provide an array of messages'
+      return res.status(400).json({
+        error: "Messages are required",
+        message: "Please provide an array of messages",
       });
     }
 
-    console.log(`Making request to Bytez API with model: ${model}`);
+    console.log(`Making request to AI/ML API with model: ${model}`);
     console.log(`API Key (first 10 chars): ${apiKey.substring(0, 10)}...`);
-    
-    // Generate a simple user ID for this session
-    const userId = `user_${Math.random().toString(36).substring(2, 15)}`;
-    console.log(`Generated UID: ${userId}`);
-    
-    // Make the request to Bytez API
-    const apiUrl = `https://api.bytez.com/v2/chat/completions`;
+
+    // Make the request to AI/ML API
+    const apiUrl = `https://api.aimlapi.com/v1/chat/completions`;
     console.log(`Making request to: ${apiUrl}`);
-    
+
     const response = await fetch(apiUrl, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
-        'User-Agent': 'Peaceful-Pup-Render/1.0'
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+        "User-Agent": "Peaceful-Pup-Render/1.0",
       },
       body: JSON.stringify({
         model: model,
         messages: messages,
         max_tokens: 1000,
         temperature: 0.7,
-        uid: userId
-      })
+      }),
     });
 
     const responseText = await response.text();
-    console.log(`Bytez API response status: ${response.status}`);
-    
+    console.log(`AI/ML API response status: ${response.status}`);
+
     if (!response.ok) {
-      console.error(`Bytez API error: ${responseText}`);
+      console.error(`AI/ML API error: ${responseText}`);
       return res.status(response.status).json({
-        error: 'Bytez API error',
-        message: responseText || 'Failed to get response from Bytez API',
-        status: response.status
+        error: "AI/ML API error",
+        message: responseText || "Failed to get response from AI/ML API",
+        status: response.status,
       });
     }
 
@@ -88,21 +83,20 @@ app.post('/api/bytez', async (req, res) => {
     try {
       data = JSON.parse(responseText);
     } catch (parseError) {
-      console.error('Failed to parse Bytez response:', parseError);
+      console.error("Failed to parse Bytez response:", parseError);
       return res.status(500).json({
-        error: 'Invalid response format',
-        message: 'Received invalid JSON from Bytez API'
+        error: "Invalid response format",
+        message: "Received invalid JSON from Bytez API",
       });
     }
 
-    console.log('Successfully proxied Bytez API request');
+    console.log("Successfully proxied Bytez API request");
     res.json(data);
-
   } catch (error) {
-    console.error('Render API error:', error);
+    console.error("Render API error:", error);
     res.status(500).json({
-      error: 'Internal server error',
-      message: error.message || 'Failed to process request'
+      error: "Internal server error",
+      message: error.message || "Failed to process request",
     });
   }
 });
@@ -110,9 +104,9 @@ app.post('/api/bytez', async (req, res) => {
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({
-    error: 'Not found',
-    message: 'The requested endpoint does not exist',
-    availableEndpoints: ['/', '/api/bytez']
+    error: "Not found",
+    message: "The requested endpoint does not exist",
+    availableEndpoints: ["/", "/api/bytez"],
   });
 });
 

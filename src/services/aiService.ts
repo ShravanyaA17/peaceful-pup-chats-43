@@ -21,7 +21,7 @@ export class AIService {
     // Get API key from localStorage
     this.apiKey = localStorage.getItem("bytez_api_key");
     this.isProduction = window.location.hostname !== "localhost";
-    
+
     // Always use Render backend - no direct SDK calls due to CORS
     // if (this.apiKey && !this.isProduction) {
     //   this.sdk = new Bytez(this.apiKey);
@@ -129,14 +129,14 @@ BE SPECIFIC. Give exact steps, not general advice. Focus on their exact words an
         // Use Render API endpoint in production
         console.info("Calling Render API for personal reasons response...");
 
-        const response = await fetch(`${this.renderApiUrl}/api/bytez`, {
+        const response = await fetch(`${this.renderApiUrl}/api/aiml`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            apiKey: this.apiKey,
-            model: "google/gemma-3-1b-it",
+            apiKey: '9ef781c231ba48f3b7bc87db36a0b317',
+            model: "gemma-3-1b-it",
             messages: [
               {
                 role: "user",
@@ -167,16 +167,18 @@ BE SPECIFIC. Give exact steps, not general advice. Focus on their exact words an
         }
       } else {
         // Always use Render backend - direct SDK calls blocked by CORS
-        console.info("Development mode: using Render API for personal reasons response...");
-        
-        const response = await fetch(`${this.renderApiUrl}/api/bytez`, {
+        console.info(
+          "Development mode: using Render API for personal reasons response..."
+        );
+
+        const response = await fetch(`${this.renderApiUrl}/api/aiml`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            apiKey: this.apiKey,
-            model: "google/gemma-3-1b-it",
+            apiKey: '9ef781c231ba48f3b7bc87db36a0b317',
+            model: "gemma-3-1b-it",
             messages: [
               {
                 role: "user",
@@ -187,7 +189,11 @@ BE SPECIFIC. Give exact steps, not general advice. Focus on their exact words an
         });
 
         if (!response.ok) {
-          console.error("Render API error:", response.status, response.statusText);
+          console.error(
+            "Render API error:",
+            response.status,
+            response.statusText
+          );
           return this.generateExamplePersonalResponse(personalReasons);
         }
 
@@ -260,14 +266,14 @@ Be specific and actionable, not generic.`;
         // Use Render API endpoint in production
         console.info("Calling Render API for general response...");
 
-        const response = await fetch(`${this.renderApiUrl}/api/bytez`, {
+        const response = await fetch(`${this.renderApiUrl}/api/aiml`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            apiKey: this.apiKey,
-            model: "google/gemma-3-1b-it",
+            apiKey: '9ef781c231ba48f3b7bc87db36a0b317',
+            model: "gemma-3-1b-it",
             messages: [
               {
                 role: "user",
@@ -298,16 +304,18 @@ Be specific and actionable, not generic.`;
         }
       } else {
         // Always use Render backend - direct SDK calls blocked by CORS
-        console.info("Development mode: using Render API for general response...");
+        console.info(
+          "Development mode: using Render API for general response..."
+        );
 
-        const response = await fetch(`${this.renderApiUrl}/api/bytez`, {
+        const response = await fetch(`${this.renderApiUrl}/api/aiml`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            apiKey: this.apiKey,
-            model: "google/gemma-3-1b-it",
+            apiKey: '9ef781c231ba48f3b7bc87db36a0b317',
+            model: "gemma-3-1b-it",
             messages: [
               {
                 role: "user",
@@ -318,7 +326,11 @@ Be specific and actionable, not generic.`;
         });
 
         if (!response.ok) {
-          console.error("Render API error:", response.status, response.statusText);
+          console.error(
+            "Render API error:",
+            response.status,
+            response.statusText
+          );
           return this.generateFallbackResponse(selectedAnswers);
         }
 
