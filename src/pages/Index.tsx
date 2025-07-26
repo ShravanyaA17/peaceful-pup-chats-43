@@ -60,8 +60,24 @@ const Index = () => {
     setAppState('checklist');
   };
 
-  const handleChecklistComplete = (answers: string[]) => {
+  const handleChecklistComplete = async (answers: string[]) => {
     setSelectedAnswers(answers);
+    
+    // Generate AI summary if API key is available
+    if (aiService.hasApiKey() && answers.length > 0) {
+      try {
+        const summaryPrompt = `Based on these selected feelings/situations: ${answers.join(', ')}, provide a brief, warm, and supportive 2-3 sentence summary of what this person might be experiencing emotionally and physically.`;
+        const aiSummary = await aiService.generatePeaceResponse('', answers);
+        // You could save this summary to state if needed
+        toast({
+          title: "AI insights generated ✨",
+          description: "Peace has provided some gentle thoughts about your check-in."
+        });
+      } catch (error) {
+        console.error('AI summary error:', error);
+      }
+    }
+    
     setAppState('reflection');
   };
 

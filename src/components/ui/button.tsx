@@ -9,16 +9,16 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-peace-purple text-primary-foreground hover:opacity-90 shadow-gentle hover:shadow-comfort",
+        default: "bg-peace-purple/90 text-primary-foreground hover:bg-peace-purple shadow-gentle hover:shadow-comfort",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "border border-peace-purple/30 bg-transparent text-peace-purple hover:bg-peace-purple/10",
+          "border border-peace-purple/40 bg-peace-purple/5 text-peace-purple hover:bg-peace-purple/15",
         secondary:
-          "bg-gradient-gentle text-peace-text-soft hover:opacity-90 shadow-gentle",
-        ghost: "hover:bg-peace-lavender/50 text-peace-text-soft",
+          "bg-gradient-gentle text-peace-text-soft hover:opacity-85 shadow-gentle border border-peace-purple/10",
+        ghost: "hover:bg-peace-lavender/60 text-peace-text-soft",
         link: "text-peace-purple underline-offset-4 hover:underline hover:text-peace-purple/80",
-        comfort: "bg-gradient-peace text-primary-foreground hover:opacity-95 shadow-comfort",
+        comfort: "bg-gradient-peace text-primary-foreground hover:bg-gradient-peace/90 shadow-comfort",
       },
       size: {
         default: "h-11 px-6 py-3 rounded-lg",
