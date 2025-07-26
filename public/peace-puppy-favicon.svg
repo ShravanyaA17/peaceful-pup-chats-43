@@ -1,0 +1,37 @@
+<svg width="128" height="128" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+  <!-- Soft background -->
+  <circle cx="64" cy="64" r="64" fill="#FFE8E1"/>
+  
+  <!-- Puppy head -->
+  <circle cx="64" cy="68" r="28" fill="#F4A460"/>
+  
+  <!-- Ears -->
+  <ellipse cx="48" cy="50" rx="10" ry="16" fill="#CD853F" transform="rotate(-25 48 50)"/>
+  <ellipse cx="80" cy="50" rx="10" ry="16" fill="#CD853F" transform="rotate(25 80 50)"/>
+  
+  <!-- Inner ears -->
+  <ellipse cx="48" cy="52" rx="5" ry="8" fill="#DEB887" transform="rotate(-25 48 52)"/>
+  <ellipse cx="80" cy="52" rx="5" ry="8" fill="#DEB887" transform="rotate(25 80 52)"/>
+  
+  <!-- Eyes (happy and friendly) -->
+  <circle cx="56" cy="64" r="4" fill="#2F2F2F"/>
+  <circle cx="72" cy="64" r="4" fill="#2F2F2F"/>
+  
+  <!-- Eye sparkles -->
+  <circle cx="57" cy="62" r="1.5" fill="#FFFFFF"/>
+  <circle cx="73" cy="62" r="1.5" fill="#FFFFFF"/>
+  
+  <!-- Nose -->
+  <ellipse cx="64" cy="72" rx="3" ry="2.5" fill="#2F2F2F"/>
+  
+  <!-- Happy smiling mouth -->
+  <path d="M 64 76 Q 56 82 50 78" stroke="#2F2F2F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M 64 76 Q 72 82 78 78" stroke="#2F2F2F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  
+  <!-- Tongue -->
+  <ellipse cx="64" cy="82" rx="4" ry="3" fill="#FF69B4"/>
+  
+  <!-- Cute spots for character -->
+  <circle cx="52" cy="72" r="2" fill="#CD853F"/>
+  <circle cx="76" cy="74" r="1.5" fill="#CD853F"/>
+</svg>
