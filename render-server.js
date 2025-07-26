@@ -58,7 +58,8 @@ app.post('/api/bytez', async (req, res) => {
       body: JSON.stringify({
         messages: messages,
         max_tokens: 1000,
-        temperature: 0.7
+        temperature: 0.7,
+        uid: "peaceful-pup-user-" + Date.now() // Generate unique user ID
       })
     });
 
