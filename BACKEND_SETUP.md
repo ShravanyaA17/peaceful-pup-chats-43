@@ -40,7 +40,8 @@ Perfect combination: **Render for backend API** + **Netlify for frontend**
    - Click "Deploy site"
 
 2. **Get Your Frontend URL:**
-   - After deployment, you'll get a URL like: `https://peaceful-pup-chats.netlify.app`
+   - After deployment, you'll get a URL like: `https://sunny-marzipan-01b40c.netlify.app`
+   - ✅ **Your app is live at:** [https://sunny-marzipan-01b40c.netlify.app](https://sunny-marzipan-01b40c.netlify.app)
    - You can customize this URL in Netlify settings
 
 ### **How This Architecture Works:**
@@ -90,7 +91,23 @@ The app automatically detects:
 ## 🔧 **Deployment Status:**
 
 - **Backend**: ✅ `https://peaceful-pup-chats-43.onrender.com`
-- **Frontend**: Ready for Netlify deployment
+- **Frontend**: ✅ `https://sunny-marzipan-01b40c.netlify.app`
 - **Integration**: ✅ Backend URL already configured in code
 
-Your app is **deployment-ready** with real AI responses! 🐕💜✨
+Your app is **fully deployed** with real AI responses! 🐕💜✨
+
+## 🎯 **Live Application:**
+
+**🌐 Access your app:** [https://sunny-marzipan-01b40c.netlify.app](https://sunny-marzipan-01b40c.netlify.app)
+
+### **How to Use:**
+
+1. **Visit your app** at the URL above
+2. **Go to Settings** (gear icon in navigation)
+3. **Enter your Bytez API key** to enable real AI responses
+4. **Start chatting** with Peace, your AI mental health companion!
+
+The app will automatically:
+- Use your **Render backend** (`https://peaceful-pup-chats-43.onrender.com`) 
+- Handle **CORS properly** through the proxy
+- Provide **real AI responses** from Bytez
