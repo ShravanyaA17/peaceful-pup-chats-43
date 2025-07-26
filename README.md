@@ -24,7 +24,7 @@ Once you select what resonates, the app surfaces **smart insights**—simple exp
 
 * ✅ **Checklist-first approach** – Designed for clarity and self-discovery, not passive consumption.
 * 🧭 **Pattern-aware insights** – Instead of vague feel-good quotes, it reflects back themes based on your input.
-* 💬 **Human-like clarity** – No over-engineered AI responses—just thoughtful feedback to help you name what you’re feeling.
+* 💬 **Human-like clarity** – Thoughtful feedback to help you name what you’re feeling.
 * 🔒 **No data collection** – Your check-ins stay private; no tracking or personal storage.
 
 ---
