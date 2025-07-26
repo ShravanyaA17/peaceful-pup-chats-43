@@ -46,12 +46,17 @@ app.post('/api/bytez', async (req, res) => {
     }
 
     console.log(`Making request to Bytez API with model: ${model}`);
+    console.log(`API Key (first 10 chars): ${apiKey.substring(0, 10)}...`);
     
     // Generate a simple user ID for this session
     const userId = `user_${Math.random().toString(36).substring(2, 15)}`;
+    console.log(`Generated UID: ${userId}`);
     
     // Make the request to Bytez API
-    const response = await fetch(`https://api.bytez.com/models/v2/${model}`, {
+    const apiUrl = `https://api.bytez.com/v2/chat/completions`;
+    console.log(`Making request to: ${apiUrl}`);
+    
+    const response = await fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -59,6 +64,7 @@ app.post('/api/bytez', async (req, res) => {
         'User-Agent': 'Peaceful-Pup-Render/1.0'
       },
       body: JSON.stringify({
+        model: model,
         messages: messages,
         max_tokens: 1000,
         temperature: 0.7,

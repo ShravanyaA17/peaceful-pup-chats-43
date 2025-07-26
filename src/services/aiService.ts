@@ -18,22 +18,24 @@ export class AIService {
   private renderApiUrl: string = "https://peaceful-pup-chats-43.onrender.com"; // Updated with your Render URL
 
   constructor() {
-    // Get API key from localStorage for frontend-only setup
+    // Get API key from localStorage
     this.apiKey = localStorage.getItem("bytez_api_key");
-    this.isProduction = window.location.hostname !== 'localhost';
+    this.isProduction = window.location.hostname !== "localhost";
     
-    if (this.apiKey && !this.isProduction) {
-      this.sdk = new Bytez(this.apiKey);
-    }
+    // Always use Render backend - no direct SDK calls due to CORS
+    // if (this.apiKey && !this.isProduction) {
+    //   this.sdk = new Bytez(this.apiKey);
+    // }
   }
 
   setApiKey(apiKey: string) {
     this.apiKey = apiKey;
-    this.isProduction = window.location.hostname !== 'localhost';
-    
-    if (!this.isProduction) {
-      this.sdk = new Bytez(apiKey);
-    }
+    this.isProduction = window.location.hostname !== "localhost";
+
+    // Always use Render backend - no direct SDK calls due to CORS
+    // if (!this.isProduction) {
+    //   this.sdk = new Bytez(apiKey);
+    // }
     localStorage.setItem("bytez_api_key", apiKey);
   }
 
@@ -126,11 +128,11 @@ BE SPECIFIC. Give exact steps, not general advice. Focus on their exact words an
       if (this.isProduction) {
         // Use Render API endpoint in production
         console.info("Calling Render API for personal reasons response...");
-        
+
         const response = await fetch(`${this.renderApiUrl}/api/bytez`, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             apiKey: this.apiKey,
@@ -145,14 +147,17 @@ BE SPECIFIC. Give exact steps, not general advice. Focus on their exact words an
         });
 
         if (!response.ok) {
-          const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
+          const errorData = await response
+            .json()
+            .catch(() => ({ message: "Unknown error" }));
           console.error("Render API error:", errorData);
           return this.generateExamplePersonalResponse(personalReasons);
         }
 
         const data = await response.json();
-        const aiResponse = data.choices?.[0]?.message?.content || data.content || "";
-        
+        const aiResponse =
+          data.choices?.[0]?.message?.content || data.content || "";
+
         if (aiResponse.trim()) {
           console.info("Render API response received successfully");
           return aiResponse;
@@ -161,31 +166,42 @@ BE SPECIFIC. Give exact steps, not general advice. Focus on their exact words an
           return this.generateExamplePersonalResponse(personalReasons);
         }
       } else {
-        // Use Bytez SDK directly in development (will fail due to CORS but has fallback)
-        console.info("Calling Bytez API directly for personal reasons response...");
+        // Always use Render backend - direct SDK calls blocked by CORS
+        console.info("Development mode: using Render API for personal reasons response...");
         
-        const model = this.sdk.model("google/gemma-3-1b-it");
-        const { error, output } = await model.run([
-          {
-            role: "user",
-            content: prompt,
+        const response = await fetch(`${this.renderApiUrl}/api/bytez`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        ]);
+          body: JSON.stringify({
+            apiKey: this.apiKey,
+            model: "google/gemma-3-1b-it",
+            messages: [
+              {
+                role: "user",
+                content: prompt,
+              },
+            ],
+          }),
+        });
 
-        if (error) {
-          console.error("Bytez API error:", error);
+        if (!response.ok) {
+          console.error("Render API error:", response.status, response.statusText);
           return this.generateExamplePersonalResponse(personalReasons);
         }
 
-        if (output && output.trim()) {
-          console.info("Bytez API response received successfully");
-          return output;
+        const data = await response.json();
+        const aiResponse = data.choices?.[0]?.message?.content || "";
+
+        if (aiResponse.trim()) {
+          console.info("Render API response received successfully");
+          return aiResponse;
         } else {
-          console.warn("Empty response from Bytez API, using fallback");
+          console.warn("Empty response from Render API, using fallback");
           return this.generateExamplePersonalResponse(personalReasons);
         }
       }
-
     } catch (error) {
       console.error("Error calling AI API for personal reasons:", error);
       return this.generateExamplePersonalResponse(personalReasons);
@@ -243,11 +259,11 @@ Be specific and actionable, not generic.`;
       if (this.isProduction) {
         // Use Render API endpoint in production
         console.info("Calling Render API for general response...");
-        
+
         const response = await fetch(`${this.renderApiUrl}/api/bytez`, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             apiKey: this.apiKey,
@@ -262,14 +278,17 @@ Be specific and actionable, not generic.`;
         });
 
         if (!response.ok) {
-          const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
+          const errorData = await response
+            .json()
+            .catch(() => ({ message: "Unknown error" }));
           console.error("Render API error:", errorData);
           return this.generateFallbackResponse(selectedAnswers);
         }
 
         const data = await response.json();
-        const aiResponse = data.choices?.[0]?.message?.content || data.content || "";
-        
+        const aiResponse =
+          data.choices?.[0]?.message?.content || data.content || "";
+
         if (aiResponse.trim()) {
           console.info("Render API response received successfully");
           return aiResponse;
@@ -278,36 +297,48 @@ Be specific and actionable, not generic.`;
           return this.generateFallbackResponse(selectedAnswers);
         }
       } else {
-        // Use Bytez SDK directly in development (will fail due to CORS but has fallback)
-        console.info("Calling Bytez API directly for general response...");
-        
-        const model = this.sdk.model("google/gemma-3-1b-it");
-        const { error, output } = await model.run([
-          {
-            role: "user",
-            content: prompt,
-          },
-        ]);
+        // Always use Render backend - direct SDK calls blocked by CORS
+        console.info("Development mode: using Render API for general response...");
 
-        if (error) {
-          console.error("Bytez API error:", error);
+        const response = await fetch(`${this.renderApiUrl}/api/bytez`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            apiKey: this.apiKey,
+            model: "google/gemma-3-1b-it",
+            messages: [
+              {
+                role: "user",
+                content: prompt,
+              },
+            ],
+          }),
+        });
+
+        if (!response.ok) {
+          console.error("Render API error:", response.status, response.statusText);
           return this.generateFallbackResponse(selectedAnswers);
         }
 
-        if (output && output.trim()) {
-          console.info("Bytez API response received successfully");
-          return output;
+        const data = await response.json();
+        const aiResponse = data.choices?.[0]?.message?.content || "";
+
+        if (aiResponse.trim()) {
+          console.info("Render API response received successfully");
+          return aiResponse;
         } else {
-          console.warn("Empty response from Bytez API, using fallback");
+          console.warn("Empty response from Render API, using fallback");
           return this.generateFallbackResponse(selectedAnswers);
         }
       }
-
     } catch (error) {
       console.error("Error calling AI API:", error);
       return this.generateFallbackResponse(selectedAnswers);
     }
-  }  private generateExamplePersonalResponse(personalReasons: string): string {
+  }
+  private generateExamplePersonalResponse(personalReasons: string): string {
     const lowerReasons = personalReasons.toLowerCase();
 
     // Analyze the personal thoughts and provide specific solutions
