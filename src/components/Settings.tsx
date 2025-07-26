@@ -63,44 +63,44 @@ export function Settings({ onClose }: SettingsProps) {
         <div className="space-y-6">
           {/* API key section hidden since we're using hardcoded AI/ML API key */}
           {false && (
-          <div>
-            <Label htmlFor="bytez-key" className="text-peace-text-soft">
-              AI API Key
-            </Label>
-            <div className="relative mt-2">
-              <Input
-                id="bytez-key"
-                type={showKey ? "text" : "password"}
-                value={bytezKey}
-                onChange={(e) => setBytezKey(e.target.value)}
-                placeholder="Enter your AI API key..."
-                className="pr-10 border-peace-pink/30 focus:border-peace-purple"
-              />
-              <button
-                type="button"
-                onClick={() => setShowKey(!showKey)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-peace-text-gentle hover:text-peace-purple transition-colors"
-              >
-                {showKey ? (
-                  <EyeOff className="w-4 h-4" />
-                ) : (
-                  <Eye className="w-4 h-4" />
-                )}
-              </button>
+            <div>
+              <Label htmlFor="bytez-key" className="text-peace-text-soft">
+                AI API Key
+              </Label>
+              <div className="relative mt-2">
+                <Input
+                  id="bytez-key"
+                  type={showKey ? "text" : "password"}
+                  value={bytezKey}
+                  onChange={(e) => setBytezKey(e.target.value)}
+                  placeholder="Enter your AI API key..."
+                  className="pr-10 border-peace-pink/30 focus:border-peace-purple"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowKey(!showKey)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-peace-text-gentle hover:text-peace-purple transition-colors"
+                >
+                  {showKey ? (
+                    <EyeOff className="w-4 h-4" />
+                  ) : (
+                    <Eye className="w-4 h-4" />
+                  )}
+                </button>
+              </div>
+              <p className="text-xs text-peace-text-gentle mt-2">
+                Get your API key from{" "}
+                <a
+                  href="https://aimlapi.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-peace-purple hover:underline"
+                >
+                  AI/ML API Platform
+                </a>{" "}
+                or leave empty to use example responses.
+              </p>
             </div>
-            <p className="text-xs text-peace-text-gentle mt-2">
-              Get your API key from{" "}
-              <a
-                href="https://aimlapi.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-peace-purple hover:underline"
-              >
-                AI/ML API Platform
-              </a>{" "}
-              or leave empty to use example responses.
-            </p>
-          </div>
           )}
 
           <div className="bg-peace-lavender/20 p-4 rounded-lg border border-peace-pink/20">
@@ -109,13 +109,14 @@ export function Settings({ onClose }: SettingsProps) {
               <div className="text-xs text-peace-text-gentle">
                 <p className="font-medium mb-1">Current Status:</p>
                 <p>
-                  ✅ AI is now active and working! Your app is connected to AI/ML API 
-                  through a secure Render backend for personalized responses.
+                  ✅ AI is now active and working! Your app is connected to
+                  AI/ML API through a secure Render backend for personalized
+                  responses.
                 </p>
                 <p className="mt-2 font-medium">How it works:</p>
                 <p>
-                  All AI requests are handled securely through our backend server
-                  with proper CORS handling and privacy protection.
+                  All AI requests are handled securely through our backend
+                  server with proper CORS handling and privacy protection.
                 </p>
               </div>
             </div>

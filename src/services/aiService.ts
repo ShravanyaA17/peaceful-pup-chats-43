@@ -43,30 +43,28 @@ export class AIService {
     // Remove redundant introductions and clean up the response
     let formatted = response
       // Remove common AI introductions
-      .replace(/^(Hello there\.|Hi there\.|Hello!\s*)?I'?m Peace,?\s*(and\s*)?I'?m here to (listen and offer support|help you|support you)\.?\s*/i, '')
-      .replace(/It takes courage to share what you're feeling\.?\s*/i, '')
-      .replace(/I can see that\.?\s*/i, '')
-      .replace(/I understand that\.?\s*/i, '')
-      
+      .replace(
+        /^(Hello there\.|Hi there\.|Hello!\s*)?I'?m Peace,?\s*(and\s*)?I'?m here to (listen and offer support|help you|support you)\.?\s*/i,
+        ""
+      )
+      .replace(/It takes courage to share what you're feeling\.?\s*/i, "")
+      .replace(/I can see that\.?\s*/i, "")
+      .replace(/I understand that\.?\s*/i, "")
+
+      // Keep ** formatting for bold text - it will be handled by the display component
+      // No changes to ** formatting - let it render as bold
+
       // Clean up repetitive phrases
-      .replace(/\s*🫂\s*You mentioned/g, ' You mentioned')
-      .replace(/\s*✨\s*$/gm, '')
-      .replace(/\s*💡\s*$/gm, '')
-      
-      // Improve formatting
-      .replace(/\*\*(Understanding Your Situation:)\*\*\s*🫂\s*/g, '**$1** ')
-      .replace(/\*\*(Immediate Action Steps:)\*\*\s*✨\s*/g, '\n**$1**\n')
-      .replace(/\*\*(Why This Helps:)\*\*\s*💡\s*/g, '\n**$1** ')
-      
+      .replace(/\s*🫂\s*You mentioned/g, " You mentioned")
+      .replace(/\s*✨\s*$/gm, "")
+      .replace(/\s*💡\s*$/gm, "")
+
       // Clean up numbered lists
-      .replace(/(\d+)\.\s*\*\*(.*?)\*\*:\s*/g, '$1. **$2:** ')
-      
+      .replace(/(\d+)\.\s*(.*?):\s*/g, "$1. $2: ")
+
       // Remove excessive spacing
-      .replace(/\n\s*\n\s*\n/g, '\n\n')
-      .replace(/^\s+|\s+$/g, '')
-      
-      // Ensure proper paragraph spacing
-      .replace(/\*\*Why This Helps:\*\*/g, '\n**Why This Helps:**');
+      .replace(/\n\s*\n\s*\n/g, "\n\n")
+      .replace(/^\s+|\s+$/g, "");
 
     return formatted;
   }
@@ -169,7 +167,7 @@ BE SPECIFIC. Give exact steps, not general advice. Focus on their exact words an
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            apiKey: '9ef781c231ba48f3b7bc87db36a0b317',
+            apiKey: "9ef781c231ba48f3b7bc87db36a0b317",
             model: "google/gemma-3n-e4b-it",
             messages: [
               {
@@ -211,7 +209,7 @@ BE SPECIFIC. Give exact steps, not general advice. Focus on their exact words an
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            apiKey: '9ef781c231ba48f3b7bc87db36a0b317',
+            apiKey: "9ef781c231ba48f3b7bc87db36a0b317",
             model: "google/gemma-3n-e4b-it",
             messages: [
               {
@@ -306,7 +304,7 @@ Be specific and actionable, not generic.`;
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            apiKey: '9ef781c231ba48f3b7bc87db36a0b317',
+            apiKey: "9ef781c231ba48f3b7bc87db36a0b317",
             model: "google/gemma-3n-e4b-it",
             messages: [
               {
@@ -348,7 +346,7 @@ Be specific and actionable, not generic.`;
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            apiKey: '9ef781c231ba48f3b7bc87db36a0b317',
+            apiKey: "9ef781c231ba48f3b7bc87db36a0b317",
             model: "google/gemma-3n-e4b-it",
             messages: [
               {

@@ -3,6 +3,8 @@ import { ChecklistQuestions } from "@/components/ChecklistQuestions";
 import { useAppContext } from "@/context/AppContext";
 import { aiService } from "@/services/aiService";
 import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
+import DogLoadingAnimation from "@/components/DogLoadingAnimation";
 
 interface QuestionAnswer {
   questionId: string;
@@ -13,13 +15,18 @@ export default function Checklist() {
   const navigate = useNavigate();
   const { setSelectedAnswers, setPersonalThoughts } = useAppContext();
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChecklistComplete = async (
     answers: QuestionAnswer[],
     personalThoughts: string
   ) => {
+    setIsLoading(true);
     setSelectedAnswers(answers);
     setPersonalThoughts(personalThoughts);
+
+    // Add a brief delay to show the dog loader
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     // Generate AI summary if API key is available
     if (
@@ -44,8 +51,19 @@ export default function Checklist() {
       }
     }
 
+    setIsLoading(false);
     navigate("/reflection");
   };
 
-  return <ChecklistQuestions onComplete={handleChecklistComplete} />;
+  return (
+    <>
+      {isLoading ? (
+        <div className="min-h-screen bg-gradient-comfort flex items-center justify-center">
+          <DogLoadingAnimation />
+        </div>
+      ) : (
+        <ChecklistQuestions onComplete={handleChecklistComplete} />
+      )}
+    </>
+  );
 }

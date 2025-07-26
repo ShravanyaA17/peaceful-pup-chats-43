@@ -14,6 +14,7 @@ import { aiService } from "@/services/aiService";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import DogLoadingAnimation from "@/components/DogLoadingAnimation";
+import { useAppContext } from "@/context/AppContext";
 
 interface Insight {
   title: string;
@@ -122,6 +123,7 @@ export function ReflectionResults({
   const [aiInsight, setAiInsight] = useState<string>("");
   const [isLoadingAI, setIsLoadingAI] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+  const { saveCurrentSession } = useAppContext();
 
   // Get only "yes" answers for traditional insights
   const yesAnswers = selectedAnswers.filter((a) => a.answer === "yes");
@@ -214,6 +216,22 @@ export function ReflectionResults({
     generateAIInsight();
   }, [selectedAnswers, personalThoughts]);
 
+  // Function to render text with ** as bold
+  const renderTextWithBold = (text: string) => {
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, index) => {
+      if (part.startsWith("**") && part.endsWith("**")) {
+        const boldText = part.slice(2, -2);
+        return (
+          <strong key={index} className="font-semibold">
+            {boldText}
+          </strong>
+        );
+      }
+      return part;
+    });
+  };
+
   const getAnswerIcon = (answer: string) => {
     switch (answer) {
       case "yes":
@@ -291,9 +309,9 @@ export function ReflectionResults({
                     <DogLoadingAnimation />
                   ) : (
                     <div className="prose prose-slate max-w-none">
-                      <p className="text-slate-700 leading-relaxed whitespace-pre-wrap">
-                        {aiInsight}
-                      </p>
+                      <div className="text-slate-700 leading-relaxed whitespace-pre-wrap">
+                        {renderTextWithBold(aiInsight)}
+                      </div>
                     </div>
                   )}
                 </Card>
